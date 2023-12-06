@@ -15,7 +15,7 @@ export const AuthProvider = ({
         const result = await authService.login(values.email, values.password);
 
         setAuth(result);
-        // localStorage.setItem('accessToken', result.accessToken);
+        localStorage.setItem('accessToken', result.accessToken);
 
         navigate("/");
     };
@@ -25,14 +25,15 @@ export const AuthProvider = ({
 
         setAuth(result);
 
-        // localStorage.setItem('accessToken', result.accessToken);
+        localStorage.setItem('accessToken', result.accessToken);
 
         navigate("/");
     };
 
-    const logoutHandler = () => {
+    const logoutHandler = async () => {
+        await authService.logout()
         setAuth({});
-        // localStorage.removeItem('accessToken');
+        localStorage.removeItem('accessToken');
     };
 
     const values = {

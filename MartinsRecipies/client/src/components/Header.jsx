@@ -6,9 +6,10 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import AuthContext from "../contexts/authContext";
+import Button from "react-bootstrap/esm/Button";
 
 function Header() {
-  const { isAuthenticated, username } = useContext(AuthContext);
+  const { isAuthenticated, username, logoutHandler } = useContext(AuthContext);
 
   return (
     <header>
@@ -41,24 +42,27 @@ function Header() {
                   <Nav.Link as={Link} to="/register">
                     Register
                   </Nav.Link>
+                  <Navbar.Text>
+                    Guest
+                  </Navbar.Text>
                 </>
               )}
-              <NavDropdown title={username} id="basic-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/user">
-                  Profile
-                </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/recipe/add">
-                  Add recipe
-                </NavDropdown.Item>
-                {isAuthenticated && (
-                  <>
+              {isAuthenticated && (
+                <>
+                  <NavDropdown title={username} id="basic-nav-dropdown">
+                    <NavDropdown.Item as={Link} to="/user">
+                      Profile
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/recipe/add">
+                      Add recipe
+                    </NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item as={Link} to="logout">
+                    <NavDropdown.Item as={Button} onClick={logoutHandler}>
                       Logout
                     </NavDropdown.Item>
-                  </>
-                )}
-              </NavDropdown>
+                  </NavDropdown>
+                </>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
