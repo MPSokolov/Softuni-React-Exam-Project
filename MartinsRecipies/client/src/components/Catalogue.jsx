@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import * as recipeService from "../services/recipeService"
+import RecipeCard from "./RecipeCard";
 
 export default function Catalogue() {
   const [allRecipes, setAllRecipes] = useState([]);
@@ -24,9 +25,9 @@ export default function Catalogue() {
       <p>Explore a variety of delicious recipes from our community.</p>
 
       {allRecipes.length > 0 ? (
-        <ul>
-          {allRecipes.map(recipe => <li key={recipe._id}>{recipe.title}</li>)}
-        </ul>
+        <div style={{"display": "flex"}}>
+          {allRecipes.map(recipe => <RecipeCard key={recipe._id} {...recipe}/>)}
+        </div>
       ) : (
         <p>No recipes available.</p>
       )}

@@ -1,29 +1,35 @@
-import { useContext, useEffect, useState } from 'react';
 
-export default function UserDetails() {
-//   const authContext = useContext(AuthContext);
+import React, { useState, useEffect, useContext } from 'react';
+import AuthContext from '../contexts/authContext'; // Import your authentication context
+import * as authService from "../services/authService"
+import * as recipeService from "../services/recipeService"
+import RecipeCard from './RecipeCard';
+
+function UserProfile() {
+  const {username, userId} = useContext(AuthContext);
   const [userDetails, setUserDetails] = useState(null);
   const [userRecipes, setUserRecipes] = useState([]);
 
-//   useEffect(() => {
-//     const fetchUserData = async () => {
-//       try {
-//         // Retrieve the username from the authentication context
-//         const { username } = authContext.user;
+  useEffect(() => {
+    // Fetch user details and recipes when the component mounts
+    const fetchUserData = async () => {
+      try {
+        // Replace this with your actual API call to fetch user details
+        const userData = await authService.userDetails()
 
-//         // Assuming you have API service functions to get user details and recipes
-//         const details = await getUserDetails(username);
-//         const recipes = await getUserRecipes(username);
+        setUserDetails(userData);
 
-//         setUserDetails(details);
-//         setUserRecipes(recipes);
-//       } catch (error) {
-//         console.error("Error fetching user details:", error);
-//       }
-//     };
+        // Replace this with your actual API call to fetch user recipes
+        const recipesData = await recipeService.getUserRecipes(userId);
 
-//     fetchUserData();
-//   }, [authContext.user]); // Update data when the user context changes
+        setUserRecipes(recipesData);
+      } catch (error) {
+        console.error('Error fetching user details and recipes:', error);
+      }
+    };
+
+    fetchUserData();
+  }, [username]); // Update details when the username parameter changes
 
   return (
     <div>
@@ -37,12 +43,16 @@ export default function UserDetails() {
         <p>Loading user details...</p>
       )}
 
-      <h3>{userDetails ? `${userDetails.username}'s Recipes` : "Recipes"}</h3>
+      <h3>{userDetails ? `${userDetails.username}'s Recipes` : 'Recipes'}</h3>
       {userRecipes.length > 0 ? (
-        <RecipeList recipes={userRecipes} />
+        <div>
+          {userRecipes.map(recipe => <RecipeCard key={recipe._id} {...recipe} />)}
+        </div>
       ) : (
         <p>No recipes available.</p>
       )}
     </div>
   );
 }
+
+export default UserProfile;

@@ -34,6 +34,8 @@ export const AuthProvider = ({
         await authService.logout()
         setAuth({});
         localStorage.removeItem('accessToken');
+
+        navigate("/");
     };
 
     const values = {
