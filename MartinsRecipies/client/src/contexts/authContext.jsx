@@ -21,7 +21,7 @@ export const AuthProvider = ({
     };
 
     const registerSubmitHandler = async (values) => {
-        const result = await authService.register(values.email, values.password);
+        const result = await authService.register(values.email, values.password, values.username);
 
         setAuth(result);
 

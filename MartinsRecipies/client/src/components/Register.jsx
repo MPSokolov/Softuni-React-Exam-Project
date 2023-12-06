@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+
+import AuthContext from '../contexts/authContext';
+
 
 export default function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { registerSubmitHandler } = useContext(AuthContext);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -21,7 +26,8 @@ export default function Register() {
     e.preventDefault();
 
     // Add registration logic here (e.g., call a registration service)
-    console.log("Registration submitted with:", { username, email, password });
+    registerSubmitHandler({ username, email, password })
+    // console.log("Registration submitted with:", { username, email, password });
 
     // Clear the form fields after submission
     setUsername("");
