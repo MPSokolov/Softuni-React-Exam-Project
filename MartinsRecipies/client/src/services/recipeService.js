@@ -10,3 +10,9 @@ export const create = async (data) => {
 
     return result;
 };
+
+export const getAll = async () => {
+    const result = await request.get(`${baseUrl}?select=title,pictureUrl,_id,_createdOn`);
+
+    return result;
+};

@@ -1,22 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import * as recipeService from "../services/recipeService"
 
 export default function Catalogue() {
   const [allRecipes, setAllRecipes] = useState([]);
 
-  // useEffect(() => {
-  //   // Fetch all recipes when the component mounts
-  //   const fetchAllRecipes = async () => {
-  //     try {
-  //       // Assuming you have an API service function to get all recipes
-  //       const recipes = await getAllRecipes();
-  //       setAllRecipes(recipes);
-  //     } catch (error) {
-  //       console.error('Error fetching all recipes:', error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchAllRecipes = async () => {
+      try {
+        const recipes = await recipeService.getAll();
+        setAllRecipes(recipes);
+      } catch (error) {
+        console.error('Error fetching all recipes:', error);
+      }
+    };
 
-  //   fetchAllRecipes();
-  // }, []); // Empty dependency array ensures the effect runs only once
+    fetchAllRecipes();
+  }, []); 
 
   return (
     <div>
@@ -24,7 +24,9 @@ export default function Catalogue() {
       <p>Explore a variety of delicious recipes from our community.</p>
 
       {allRecipes.length > 0 ? (
-        <RecipeList recipes={allRecipes} />
+        <ul>
+          {allRecipes.map(recipe => <li key={recipe._id}>{recipe.title}</li>)}
+        </ul>
       ) : (
         <p>No recipes available.</p>
       )}

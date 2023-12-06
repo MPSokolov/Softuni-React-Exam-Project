@@ -22,10 +22,10 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/recipe/all" element={<Catalogue />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/user" element={<UserDetails />} />
+          <Route path="/recipe/all" element={<Catalogue />} />
           <Route path="/recipe/add" element={<RecipeAdd />} />
         </Routes>
 
