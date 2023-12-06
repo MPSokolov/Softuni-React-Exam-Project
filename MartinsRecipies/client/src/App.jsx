@@ -1,6 +1,7 @@
 import { useState } from "react";
-
 import { Routes, Route } from "react-router-dom";
+
+import { AuthProvider } from "./contexts/authContext";
 
 import Home from "./components/Home";
 import Footer from "./components/Footer";
@@ -16,18 +17,20 @@ function App() {
 
   return (
     <>
-      <Header />
+      <AuthProvider>
+        <Header />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/recipe/all" element={<Catalogue />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/user" element={<UserDetails />} />
-        <Route path="/recipe/add" element={<RecipeAdd />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/recipe/all" element={<Catalogue />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/user" element={<UserDetails />} />
+          <Route path="/recipe/add" element={<RecipeAdd />} />
+        </Routes>
 
-      <Footer />
+        <Footer />
+      </AuthProvider>
     </>
   );
 }

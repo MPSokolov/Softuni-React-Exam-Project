@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from "react";
+import AuthContext from "../contexts/authContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { loginSubmitHandler } = useContext(AuthContext);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -16,7 +18,8 @@ export default function Login() {
     e.preventDefault();
 
     // Add login logic here (e.g., call an authentication service)
-    console.log("Login submitted with:", { email, password });
+    loginSubmitHandler({ email, password });
+    // console.log("Login submitted with:", { email, password });
 
     // Clear the form fields after submission
     setEmail("");
