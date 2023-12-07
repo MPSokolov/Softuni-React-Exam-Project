@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 import * as recipeService from "../services/recipeService"
+import AuthContext from '../contexts/authContext';
 
 export default function RecipeDetails() {
+  const {userId, isAuthenticated} = useContext(AuthContext);
   const { id } = useParams();
   const [recipeDetails, setRecipeDetails] = useState(null);
 
@@ -22,6 +24,22 @@ export default function RecipeDetails() {
     fetchRecipeDetails();
   }, [id]); // Update details when the recipe ID parameter changes
 
+  const renderEditDeleteButtons = () => {
+    if (isAuthenticated && userId === recipeDetails._ownerId) {
+      return (
+        <div>
+          <Link to={`/recipe/${id}/edit`}>
+            <button>Edit</button>
+          </Link>
+          <Link to={`/recipe/${id}/delete`}>
+            <button>Delete</button>
+          </Link>
+        </div>
+      );
+    }
+    return null;
+  };
+  
   return (
     <div>
       {recipeDetails ? (
@@ -30,7 +48,7 @@ export default function RecipeDetails() {
           <p>Created on: {new Date(parseInt(recipeDetails._createdOn, 10)).toLocaleDateString()}</p>
           <p>{recipeDetails.ingredients}</p>
           <p>{recipeDetails.instructions}</p>
-          {/* Add more details as needed */}
+          {renderEditDeleteButtons()}
         </div>
       ) : (
         <p>Loading recipe details...</p>
