@@ -1339,59 +1339,32 @@
     	}
     };
     var seedData = {
-    	// recipes: {
-    	// 	"3987279d-0ad4-4afb-8ca9-5b256ae3b298": {
-    	// 		_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    	// 		name: "Easy Lasagna",
-    	// 		img: "assets/lasagna.jpg",
-    	// 		ingredients: [
-    	// 			"1 tbsp Ingredient 1",
-    	// 			"2 cups Ingredient 2",
-    	// 			"500 g  Ingredient 3",
-    	// 			"25 g Ingredient 4"
-    	// 		],
-    	// 		steps: [
-    	// 			"Prepare ingredients",
-    	// 			"Mix ingredients",
-    	// 			"Cook until done"
-    	// 		],
-    	// 		_createdOn: 1613551279012
-    	// 	},
-    	// 	"8f414b4f-ab39-4d36-bedb-2ad69da9c830": {
-    	// 		_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    	// 		name: "Grilled Duck Fillet",
-    	// 		img: "assets/roast.jpg",
-    	// 		ingredients: [
-    	// 			"500 g  Ingredient 1",
-    	// 			"3 tbsp Ingredient 2",
-    	// 			"2 cups Ingredient 3"
-    	// 		],
-    	// 		steps: [
-    	// 			"Prepare ingredients",
-    	// 			"Mix ingredients",
-    	// 			"Cook until done"
-    	// 		],
-    	// 		_createdOn: 1613551344360
-    	// 	},
-    	// 	"985d9eab-ad2e-4622-a5c8-116261fb1fd2": {
-    	// 		_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    	// 		name: "Roast Trout",
-    	// 		img: "assets/fish.jpg",
-    	// 		ingredients: [
-    	// 			"4 cups Ingredient 1",
-    	// 			"1 tbsp Ingredient 2",
-    	// 			"1 tbsp Ingredient 3",
-    	// 			"750 g  Ingredient 4",
-    	// 			"25 g Ingredient 5"
-    	// 		],
-    	// 		steps: [
-    	// 			"Prepare ingredients",
-    	// 			"Mix ingredients",
-    	// 			"Cook until done"
-    	// 		],
-    	// 		_createdOn: 1613551388703
-    	// 	}
-    	// },
+    	recipes: {
+    		"3987279d-0ad4-4afb-8ca9-5b256ae3b298": {
+    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+    			title: "Easy Lasagna",
+    			pictureUrl: "https://m.media-amazon.com/images/M/MV5BZTc2MDQ3ZjQtZTVlMy00OTI0LWExMzQtNjZkOGRlZjlkZTFmXkEyXkFqcGdeQXZ3ZXNsZXk@._V1_.jpg",
+    			ingredients: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam nemo quam tempora inventore quae, sunt accusantium pariatur consequuntur doloremque, impedit placeat aperiam dolorem harum rerum saepe non eius animi vitae!",
+    			instructions: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam nemo quam tempora inventore quae, sunt accusantium pariatur consequuntur doloremque, impedit placeat aperiam dolorem harum rerum saepe non eius animi vitae!",
+    			_createdOn: 1613551279012
+    		},
+    		"8f414b4f-ab39-4d36-bedb-2ad69da9c830": {
+    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+    			title: "Grilled Duck Fillet",
+    			pictureUrl: "https://m.media-amazon.com/images/M/MV5BZTc2MDQ3ZjQtZTVlMy00OTI0LWExMzQtNjZkOGRlZjlkZTFmXkEyXkFqcGdeQXZ3ZXNsZXk@._V1_.jpg",
+    			ingredients: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam nemo quam tempora inventore quae, sunt accusantium pariatur consequuntur doloremque, impedit placeat aperiam dolorem harum rerum saepe non eius animi vitae!",
+    			instructions: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam nemo quam tempora inventore quae, sunt accusantium pariatur consequuntur doloremque, impedit placeat aperiam dolorem harum rerum saepe non eius animi vitae!",
+    			_createdOn: 1613551344360
+    		},
+    		"985d9eab-ad2e-4622-a5c8-116261fb1fd2": {
+    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+    			title: "Roast Trout",
+    			pictureUrl: "https://m.media-amazon.com/images/M/MV5BZTc2MDQ3ZjQtZTVlMy00OTI0LWExMzQtNjZkOGRlZjlkZTFmXkEyXkFqcGdeQXZ3ZXNsZXk@._V1_.jpg",
+    			ingredients: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam nemo quam tempora inventore quae, sunt accusantium pariatur consequuntur doloremque, impedit placeat aperiam dolorem harum rerum saepe non eius animi vitae!",
+    			instructions: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam nemo quam tempora inventore quae, sunt accusantium pariatur consequuntur doloremque, impedit placeat aperiam dolorem harum rerum saepe non eius animi vitae!",
+    			_createdOn: 1613551388703
+    		}
+    	},
     	// comments: {
     	// 	"0a272c58-b7ea-4e09-a000-7ec988248f66": {
     	// 		_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
