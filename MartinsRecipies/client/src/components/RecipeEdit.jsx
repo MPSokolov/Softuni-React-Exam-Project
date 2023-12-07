@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import * as recipeService from "../services/recipeService";
+import AuthContext from '../contexts/authContext';
 
 export default function EditRecipe() {
+  const {userId} = useContext(AuthContext);
   const navigate = useNavigate();
   const { id } = useParams();
   const [title, setTitle] = useState("");
@@ -15,6 +17,8 @@ export default function EditRecipe() {
     const fetchRecipeDetails = async () => {
       try {
         const data = await recipeService.getOne(id);
+
+        if (userId !== data._ownerId) {navigate(`/recipe/${id}`)}
 
         setTitle(data.title);
         setIngredients(data.ingredients);
