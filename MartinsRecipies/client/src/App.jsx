@@ -12,6 +12,8 @@ import Register from "./components/Register";
 import UserDetails from "./components/UserDetails";
 import RecipeAdd from "./components/RecipeAdd";
 import RecipeDetails from "./components/RecipeDetails"
+import RecipeEdit from "./components/RecipeEdit";
+import RecipeDelete from "./components/RecipeDelete";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -29,6 +31,8 @@ function App() {
           <Route path="/recipe/all" element={<Catalogue />} />
           <Route path="/recipe/add" element={<RecipeAdd />} />
           <Route path="/recipe/:id" element={<RecipeDetails />} />
+          <Route path="/recipe/:id/edit" element={<RecipeEdit />} />
+          <Route path="/recipe/:id/delete" element={<RecipeDelete />} />
         </Routes>
 
         <Footer />

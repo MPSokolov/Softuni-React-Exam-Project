@@ -34,3 +34,15 @@ export const getUserRecipes = async (userId) => {
 
     return result;
 };
+
+export const updateOne = async (id, data) => {
+    const result = await request.put(`${baseUrl}/${id}`, data);
+
+    return result;
+};
+
+export const deleteOne = async (id) => {
+    const result = await request.remove(`${baseUrl}/${id}`);
+
+    return result;
+}
