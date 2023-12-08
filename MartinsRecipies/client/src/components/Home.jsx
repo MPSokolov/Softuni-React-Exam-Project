@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { get3MostRecent } from "../services/recipeService";
 
 import RecipeCard from "./RecipeCard";
+import styles from './assets/Home.module.css';
 
 export default function Home() {
   const [recentRecipes, setRecentRecipes] = useState([]);
@@ -23,13 +24,13 @@ export default function Home() {
   }, []); // Empty dependency array ensures the effect runs only once
 
   return (
-    <div>
+    <div className={styles.homeContainer}>
       <h2>Welcome to My Recipe App!</h2>
       <p>Discover and share delicious recipes created by this community.</p>
 
       <h3>Most Recent Recipes</h3>
       {recentRecipes.length > 0 ? (
-        <div style={{"display": "flex"}}>
+        <div className={styles.cardHolder}>
           {recentRecipes.map(recipe => <RecipeCard key={recipe._id} {...recipe} />)}
         </div>
       ) : (
