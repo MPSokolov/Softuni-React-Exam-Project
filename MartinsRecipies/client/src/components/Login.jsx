@@ -1,13 +1,13 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Alert } from "react-bootstrap";
 import AuthContext from "../contexts/authContext";
 import styles from './assets/Login.module.css';
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { loginSubmitHandler } = useContext(AuthContext);
+  const { loginSubmitHandler, errors } = useContext(AuthContext);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -17,21 +17,28 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Add login logic here (e.g., call an authentication service)
-    loginSubmitHandler({ email, password });
-    // console.log("Login submitted with:", { email, password });
+    await loginSubmitHandler({ email, password });
 
-    // Clear the form fields after submission
     setEmail("");
     setPassword("");
   };
 
+  
+  useEffect(() => {
+    // This block will run when the error state in the context changes
+    if (errors) {
+      console.log('Error during login:', errors);
+      // Handle the error as needed (e.g., display an alert)
+    }
+  }, [errors]);
+
   return (
     <Container>
       <Form className={styles.form} onSubmit={handleSubmit}>
+      {errors && <Alert variant="danger">{errors.message}</Alert>}
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -39,6 +46,7 @@ export default function Login() {
             placeholder="Enter email"
             value={email}
             onChange={handleEmailChange}
+            required
           />
         </Form.Group>
 
@@ -49,6 +57,7 @@ export default function Login() {
             placeholder="Password"
             value={password}
             onChange={handlePasswordChange}
+            required
           />
         </Form.Group>
 
