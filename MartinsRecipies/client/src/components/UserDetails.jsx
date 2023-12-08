@@ -1,9 +1,11 @@
-
 import React, { useState, useEffect, useContext } from 'react';
-import AuthContext from '../contexts/authContext'; // Import your authentication context
+
 import * as authService from "../services/authService"
 import * as recipeService from "../services/recipeService"
+
+import AuthContext from '../contexts/authContext'; // Import your authentication context
 import RecipeCard from './RecipeCard';
+import styles from './assets/UserDetails.module.css';
 
 function UserProfile() {
   const {username, userId} = useContext(AuthContext);
@@ -32,9 +34,9 @@ function UserProfile() {
   }, [username]); // Update details when the username parameter changes
 
   return (
-    <div>
+    <div className={styles.page}>
       {userDetails ? (
-        <div>
+        <div className={styles.userCard}>
           <h2>{userDetails.username}'s Profile</h2>
           <p>Email: {userDetails.email}</p>
           {/* Add more user details as needed */}
@@ -43,9 +45,9 @@ function UserProfile() {
         <p>Loading user details...</p>
       )}
 
-      <h3>{userDetails ? `${userDetails.username}'s Recipes` : 'Recipes'}</h3>
+      <h3 className={styles.recipeSectionTitle}>{userDetails ? `${userDetails.username}'s Recipes` : 'Recipes'}</h3>
       {userRecipes.length > 0 ? (
-        <div>
+        <div className={styles.cardHolder}>
           {userRecipes.map(recipe => <RecipeCard key={recipe._id} {...recipe} />)}
         </div>
       ) : (

@@ -8,6 +8,8 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import AuthContext from "../contexts/authContext";
 import Button from "react-bootstrap/esm/Button";
 
+import styles from './assets/Header.module.css';
+
 function Header() {
   const { isAuthenticated, username, logoutHandler } = useContext(AuthContext);
 
@@ -27,7 +29,7 @@ function Header() {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
+            <Nav className={styles.navbar}>
               <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>

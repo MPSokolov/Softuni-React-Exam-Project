@@ -1,0 +1,24 @@
+.page{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.cardHolder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.userCard {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px;
+    width: 300px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.recipeSectionTitle {
+    text-align: center;
+}

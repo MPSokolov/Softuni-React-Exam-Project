@@ -5,6 +5,8 @@ import * as recipeService from "../services/recipeService";
 import * as commentService from "../services/commentService";
 import AuthContext from "../contexts/authContext";
 
+import styles from './assets/RecipeDetails.module.css';
+
 export default function RecipeDetails() {
   const { userId, isAuthenticated, username } = useContext(AuthContext);
   const { id } = useParams();
@@ -74,7 +76,9 @@ export default function RecipeDetails() {
               parseInt(recipeDetails._createdOn, 10)
             ).toLocaleDateString()}
           </p>
+          <h3>Ingredients</h3>
           <p>{recipeDetails.ingredients}</p>
+          <h3>Instructions</h3>
           <p>{recipeDetails.instructions}</p>
           {renderEditDeleteButtons()}
           {/* Comment Form */}
