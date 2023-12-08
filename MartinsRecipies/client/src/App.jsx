@@ -14,6 +14,7 @@ import RecipeAdd from "./components/RecipeAdd";
 import RecipeDetails from "./components/RecipeDetails";
 import RecipeEdit from "./components/RecipeEdit";
 import RecipeDelete from "./components/RecipeDelete";
+import Page404 from "./components/Page404";
 import AuthGuard from "./components/AuthGuard";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             <Route path="/recipe/:id/edit" element={<RecipeEdit />} />
             <Route path="/recipe/:id/delete" element={<RecipeDelete />} />
           </Route>
+          <Route path="*" element={<Page404/>} />
         </Routes>
 
         <Footer />
