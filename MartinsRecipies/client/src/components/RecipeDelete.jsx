@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import * as recipeService from "../services/recipeService";
+import AuthContext from '../contexts/authContext';
 
 export default function DeleteRecipe() {
   const navigate = useNavigate();
+  const {userId} = useContext(AuthContext);
   const { id } = useParams();
   const [recipeDetails, setRecipeDetails] = useState(null);
 
@@ -15,6 +17,8 @@ export default function DeleteRecipe() {
         // Replace this with your actual API call to fetch recipe details
 
         const data = await recipeService.getOne(id);
+
+        if (userId !== data._ownerId) {navigate(`/recipe/${id}`)}
 
         setRecipeDetails(data);
       } catch (error) {
