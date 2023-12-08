@@ -1,5 +1,8 @@
 import { useState, useContext } from "react";
+
+import { Form, Button, Container } from "react-bootstrap";
 import AuthContext from "../contexts/authContext";
+import styles from './assets/Login.module.css';
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -27,31 +30,32 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input
+    <Container>
+      <Form className={styles.form} onSubmit={handleSubmit}>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
             type="email"
+            placeholder="Enter email"
             value={email}
             onChange={handleEmailChange}
-            required
           />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword" className={styles.passwordGroup}>
+          <Form.Label>Password</Form.Label>
+          <Form.Control
             type="password"
+            placeholder="Password"
             value={password}
             onChange={handlePasswordChange}
-            required
           />
-        </label>
-        <br />
-        <button type="submit">Login</button>
-      </form>
-    </div>
+        </Form.Group>
+
+        <Button variant="primary" type="submit">
+          Login
+        </Button>
+      </Form>
+    </Container>
   );
 }
