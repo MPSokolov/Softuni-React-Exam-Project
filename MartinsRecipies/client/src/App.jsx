@@ -15,11 +15,12 @@ import RecipeDetails from "./components/RecipeDetails";
 import RecipeEdit from "./components/RecipeEdit";
 import RecipeDelete from "./components/RecipeDelete";
 import Page404 from "./components/Page404";
+import ErrorBoundary from "./components/ErrorBoundary";
 import AuthGuard from "./components/AuthGuard";
 
 function App() {
   return (
-    <>
+    <ErrorBoundary>
       <AuthProvider>
         <Header />
 
@@ -40,7 +41,7 @@ function App() {
 
         <Footer />
       </AuthProvider>
-    </>
+    </ErrorBoundary>
   );
 }
 
