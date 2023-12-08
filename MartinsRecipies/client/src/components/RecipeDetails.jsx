@@ -5,7 +5,7 @@ import * as recipeService from "../services/recipeService";
 import * as commentService from "../services/commentService";
 import AuthContext from "../contexts/authContext";
 
-import { Button, Alert } from 'react-bootstrap';
+import { Button, Alert } from "react-bootstrap";
 import styles from "./assets/RecipeDetails.module.css";
 
 export default function RecipeDetails() {
@@ -118,20 +118,18 @@ export default function RecipeDetails() {
             <div>
               <h3 className={styles.commentsTitle}>Comments</h3>
               {comments.map((comment) => (
-                <>
-                  <div key={comment._id}>
-                    <p>
-                      <strong>{comment.username}:</strong> {comment.text}
-                    </p>
-                    <p>
-                      Posted on:{" "}
-                      {new Date(
-                        parseInt(comment._createdOn, 10)
-                      ).toLocaleDateString()}
-                    </p>
-                  </div>
+                <div key={comment._id}>
+                  <p>
+                    <strong>{comment.username}:</strong> {comment.text}
+                  </p>
+                  <p>
+                    Posted on:{" "}
+                    {new Date(
+                      parseInt(comment._createdOn, 10)
+                    ).toLocaleDateString()}
+                  </p>
                   <hr />
-                </>
+                </div>
               ))}
             </div>
           </div>
