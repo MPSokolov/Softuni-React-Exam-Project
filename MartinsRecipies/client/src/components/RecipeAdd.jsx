@@ -2,14 +2,16 @@ import { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import * as recipeService from "../services/recipeService"
-import AuthContext from "../contexts/authContext";
+// import AuthContext from "../contexts/authContext";
+import { Form, Button, Container } from 'react-bootstrap';
+import styles from './assets/RecipeAdd.module.css';
 
 export default function RecipeAdd() {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [instructions, setInstructions] = useState("");
   const [pictureUrl, setPictureUrl] = useState('');
-  const { userId } = useContext(AuthContext);
+  // const { userId } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -54,44 +56,55 @@ export default function RecipeAdd() {
   };
 
   return (
-    <div>
-      <h2>Add New Recipe</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Title:
-          <input
+    <Container className="mt-5">
+      <Form onSubmit={handleSubmit} className={styles.form}>
+        <Form.Group controlId="formRecipeTitle">
+          <Form.Label>Recipe Title</Form.Label>
+          <Form.Control
             type="text"
+            placeholder="Enter recipe title"
             value={title}
             onChange={handleTitleChange}
             required
           />
-        </label>
-        <br />
-        <label>
-          Ingredients:
-          <textarea
+        </Form.Group>
+
+        <Form.Group controlId="formRecipeIngredients" className={styles.group}>
+          <Form.Label>Ingredients</Form.Label>
+          <Form.Control
+            as="textarea"
+            placeholder="Enter ingredients (comma-separated)"
             value={ingredients}
             onChange={handleIngredientsChange}
             required
           />
-        </label>
-        <br />
-        <label>
-          Instructions:
-          <textarea
+        </Form.Group>
+
+        <Form.Group controlId="formRecipeInstructions" className={styles.group}>
+          <Form.Label>Recipe Instructions</Form.Label>
+          <Form.Control
+            as="textarea"
+            placeholder="Enter recipe instructions"
             value={instructions}
             onChange={handleInstructionsChange}
             required
           />
-        </label>
-        <br />
-        <label>
-          Picture URL:
-          <input type="url" value={pictureUrl} onChange={handlePictureUrlChange} />
-        </label>
-        <br />
-        <button type="submit">Add Recipe</button>
-      </form>
-    </div>
+        </Form.Group>
+
+        <Form.Group controlId="formRecipePictureUrl" className={styles.group}>
+          <Form.Label>Picture URL</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter picture URL"
+            value={pictureUrl}
+            onChange={handlePictureUrlChange}
+          />
+        </Form.Group>
+
+        <Button variant="primary" type="submit">
+          Add Recipe
+        </Button>
+      </Form>
+    </Container>
   );
 }
