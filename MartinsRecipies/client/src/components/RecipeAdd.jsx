@@ -44,15 +44,19 @@ export default function RecipeAdd() {
       // Add more fields as needed
     };
 
-    await recipeService.create(newRecipe)
+    try {
+      await recipeService.create(newRecipe)
 
-    navigate("/user")
+      navigate("/user")
 
-    // Clear the form fields after submission
-    setTitle("");
-    setIngredients("");
-    setInstructions("");
-    setPictureUrl('');
+      // Clear the form fields after submission
+      setTitle("");
+      setIngredients("");
+      setInstructions("");
+      setPictureUrl('');
+    } catch (error) {
+      console.error(error)
+    }
   };
 
   return (
