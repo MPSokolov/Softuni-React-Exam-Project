@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import * as recipeService from "../services/recipeService"
 // import AuthContext from "../contexts/authContext";
 import { Form, Button, Container } from 'react-bootstrap';
-import styles from './assets/RecipeAdd.module.css';
+import styles from './assets/RecipeCRUD.module.css';
 
 export default function RecipeAdd() {
   const [title, setTitle] = useState("");
