@@ -8,6 +8,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { loginSubmitHandler, errors } = useContext(AuthContext);
+  const [error, setError] = useState('');
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -20,10 +21,17 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!email || !password) {
+      setError('All fields are required.');
+      return;
+    }
+
     await loginSubmitHandler({ email, password });
 
     setEmail("");
     setPassword("");
+
+    setError('');
   };
 
   
@@ -38,6 +46,7 @@ export default function Login() {
   return (
     <Container>
       <Form className={styles.form} onSubmit={handleSubmit}>
+      {error && <Alert variant="danger">{error}</Alert>}
       {errors && <Alert variant="danger">{errors.message}</Alert>}
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -46,7 +55,7 @@ export default function Login() {
             placeholder="Enter email"
             value={email}
             onChange={handleEmailChange}
-            required
+            // required
           />
         </Form.Group>
 
@@ -57,7 +66,7 @@ export default function Login() {
             placeholder="Password"
             value={password}
             onChange={handlePasswordChange}
-            required
+            // required
           />
         </Form.Group>
 
