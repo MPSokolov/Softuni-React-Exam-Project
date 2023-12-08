@@ -5,7 +5,8 @@ import * as recipeService from "../services/recipeService";
 import * as commentService from "../services/commentService";
 import AuthContext from "../contexts/authContext";
 
-import styles from './assets/RecipeDetails.module.css';
+import Button from "react-bootstrap/Button";
+import styles from "./assets/RecipeDetails.module.css";
 
 export default function RecipeDetails() {
   const { userId, isAuthenticated, username } = useContext(AuthContext);
@@ -52,12 +53,14 @@ export default function RecipeDetails() {
   const renderEditDeleteButtons = () => {
     if (isAuthenticated && userId === recipeDetails._ownerId) {
       return (
-        <div>
+        <div className={styles.btnsHolder}>
           <Link to={`/recipe/${id}/edit`}>
-            <button>Edit</button>
+            <Button variant="warning">Edit</Button>
           </Link>
           <Link to={`/recipe/${id}/delete`}>
-            <button>Delete</button>
+            <Button variant="danger" className={styles.deleteBtn}>
+              Delete
+            </Button>
           </Link>
         </div>
       );
@@ -66,9 +69,9 @@ export default function RecipeDetails() {
   };
 
   return (
-    <div>
+    <div className={styles.recipeDetailsContainer}>
       {recipeDetails ? (
-        <div>
+        <div className={styles.recipeCard}>
           <h2>{recipeDetails.title}</h2>
           <p>
             Created on:{" "}
@@ -76,6 +79,11 @@ export default function RecipeDetails() {
               parseInt(recipeDetails._createdOn, 10)
             ).toLocaleDateString()}
           </p>
+          <img
+            src={recipeDetails.pictureUrl}
+            alt="Image"
+            className={styles.recipeImage}
+          />
           <h3>Ingredients</h3>
           <p>{recipeDetails.ingredients}</p>
           <h3>Instructions</h3>
@@ -83,7 +91,7 @@ export default function RecipeDetails() {
           {renderEditDeleteButtons()}
           {/* Comment Form */}
           {isAuthenticated && (
-            <form onSubmit={handleCommentSubmit}>
+            <form onSubmit={handleCommentSubmit} className={styles.commentForm}>
               <label>
                 Add a Comment:
                 <textarea
@@ -91,24 +99,30 @@ export default function RecipeDetails() {
                   onChange={(e) => setCommentText(e.target.value)}
                 ></textarea>
               </label>
-              <button type="submit">Submit Comment</button>
+              {/* <button type="submit">Submit Comment</button> */}
+              <Button variant="primary" type="submit">
+                Submit Comment
+              </Button>
             </form>
           )}
           {/* Display Comments */}
           <div>
-            <h3>Comments</h3>
+            <h3 className={styles.commentsTitle}>Comments</h3>
             {comments.map((comment) => (
-              <div key={comment._id}>
-                <p>
-                  <strong>{comment.username}:</strong> {comment.text}
-                </p>
-                <p>
-                  Created on:{" "}
-                  {new Date(
-                    parseInt(comment._createdOn, 10)
-                  ).toLocaleDateString()}
-                </p>
-              </div>
+              <>
+                <div key={comment._id}>
+                  <p>
+                    <strong>{comment.username}:</strong> {comment.text}
+                  </p>
+                  <p>
+                    Posted on:{" "}
+                    {new Date(
+                      parseInt(comment._createdOn, 10)
+                    ).toLocaleDateString()}
+                  </p>
+                </div>
+                <hr />
+              </>
             ))}
           </div>
         </div>
