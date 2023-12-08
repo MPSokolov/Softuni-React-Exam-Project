@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import * as recipeService from "../services/recipeService"
 // import AuthContext from "../contexts/authContext";
-import { Form, Button, Container } from 'react-bootstrap';
+import { Form, Button, Container, Alert } from 'react-bootstrap';
 import styles from './assets/RecipeCRUD.module.css';
 
 export default function RecipeAdd() {
@@ -11,6 +11,7 @@ export default function RecipeAdd() {
   const [ingredients, setIngredients] = useState("");
   const [instructions, setInstructions] = useState("");
   const [pictureUrl, setPictureUrl] = useState('');
+  const [error, setError] = useState('');
   // const { userId } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -31,8 +32,25 @@ export default function RecipeAdd() {
     setPictureUrl(e.target.value);
   };
 
+  const isValidURL = (url) => {
+    // Regular expression for a simple URL validation
+    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+  
+    return urlRegex.test(url);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!title || !ingredients || !instructions || !pictureUrl) {
+      setError('All fields are required.');
+      return;
+    }
+
+    if (!isValidURL(pictureUrl)) {
+      setError('Invalid picture URL');
+      return;
+    }
 
     // Add logic to send the new recipe data to the server
     const newRecipe = {
@@ -54,6 +72,8 @@ export default function RecipeAdd() {
       setIngredients("");
       setInstructions("");
       setPictureUrl('');
+
+      setError('');
     } catch (error) {
       console.error(error)
     }
@@ -62,6 +82,7 @@ export default function RecipeAdd() {
   return (
     <Container className="mt-5">
       <Form onSubmit={handleSubmit} className={styles.form}>
+      {error && <Alert variant="danger">{error}</Alert>}
         <Form.Group controlId="formRecipeTitle">
           <Form.Label>Recipe Title</Form.Label>
           <Form.Control
@@ -69,7 +90,7 @@ export default function RecipeAdd() {
             placeholder="Enter recipe title"
             value={title}
             onChange={handleTitleChange}
-            required
+            // required
           />
         </Form.Group>
 
@@ -80,7 +101,7 @@ export default function RecipeAdd() {
             placeholder="Enter ingredients (comma-separated)"
             value={ingredients}
             onChange={handleIngredientsChange}
-            required
+            // required
           />
         </Form.Group>
 
@@ -91,7 +112,7 @@ export default function RecipeAdd() {
             placeholder="Enter recipe instructions"
             value={instructions}
             onChange={handleInstructionsChange}
-            required
+            // required
           />
         </Form.Group>
 
