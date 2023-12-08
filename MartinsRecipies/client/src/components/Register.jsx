@@ -1,7 +1,8 @@
 import { useState, useContext } from 'react';
 
 import AuthContext from '../contexts/authContext';
-
+import { Form, Button, Container } from 'react-bootstrap';
+import styles from './assets/Register.module.css';
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -36,41 +37,42 @@ export default function Register() {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input
+    <Container>
+      <Form className={styles.form} onSubmit={handleSubmit}>
+        <Form.Group controlId="formBasicUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
             type="text"
+            placeholder="Enter username"
             value={username}
             onChange={handleUsernameChange}
-            required
           />
-        </label>
-        <br />
-        <label>
-          Email:
-          <input
+        </Form.Group>
+
+        <Form.Group controlId="formBasicEmail" className={styles.emailGroup}>
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
             type="email"
+            placeholder="Enter email"
             value={email}
             onChange={handleEmailChange}
-            required
           />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword" className={styles.passwordGroup}>
+          <Form.Label>Password</Form.Label>
+          <Form.Control
             type="password"
+            placeholder="Password"
             value={password}
             onChange={handlePasswordChange}
-            required
           />
-        </label>
-        <br />
-        <button type="submit">Register</button>
-      </form>
-    </div>
+        </Form.Group>
+
+        <Button variant="primary" type="submit">
+          Register
+        </Button>
+      </Form>
+    </Container>
   );
 }

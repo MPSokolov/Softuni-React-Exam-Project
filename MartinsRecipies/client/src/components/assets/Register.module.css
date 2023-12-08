@@ -1,0 +1,19 @@
+.form {
+    width: 33vw;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: calc(50vh - 308px);
+}
+
+.form button {
+    margin-top: 20px;
+}
+
+.passwordGroup {
+    margin-top: 10px;
+}
+
+.emailGroup {
+    margin-top: 10px;
+}
