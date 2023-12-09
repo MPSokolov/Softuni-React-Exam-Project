@@ -24,17 +24,22 @@ export const AuthProvider = ({ children }) => {
   };
 
   const registerSubmitHandler = async (values) => {
-    const result = await authService.register(
-      values.email,
-      values.password,
-      values.username
-    );
-
-    setAuth(result);
-
-    localStorage.setItem("accessToken", result.accessToken);
-
-    navigate("/");
+    try {
+      const result = await authService.register(
+        values.email,
+        values.password,
+        values.username
+      );
+  
+      setAuth(result);
+  
+      localStorage.setItem("accessToken", result.accessToken);
+  
+      navigate("/");
+      
+    } catch (error) {
+      setAuth({error: error})
+    }
   };
 
   const logoutHandler = async () => {

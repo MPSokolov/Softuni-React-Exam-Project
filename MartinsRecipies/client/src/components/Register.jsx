@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
 import AuthContext from '../contexts/authContext';
 import { Form, Button, Container, Alert } from 'react-bootstrap';
@@ -10,7 +10,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState('');
 
-  const { registerSubmitHandler } = useContext(AuthContext);
+  const { registerSubmitHandler, errors } = useContext(AuthContext);
 
   const isEmailValid = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -29,7 +29,7 @@ export default function Register() {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!username || !email || !password) {
@@ -48,7 +48,7 @@ export default function Register() {
     }
 
     // Add registration logic here (e.g., call a registration service)
-    registerSubmitHandler({ username, email, password })
+    await registerSubmitHandler({ username, email, password })
     // console.log("Registration submitted with:", { username, email, password });
 
     // Clear the form fields after submission
@@ -59,9 +59,18 @@ export default function Register() {
     setError('');
   };
 
+  useEffect(() => {
+    // This block will run when the error state in the context changes
+    if (errors) {
+      console.log('Error during login:', errors);
+      // Handle the error as needed (e.g., display an alert)
+    }
+  }, [errors]);
+
   return (
     <Container>
       {error && <Alert variant="danger">{error}</Alert>}
+      {errors && <Alert variant="danger">{errors.message}</Alert>}
       <Form className={styles.form} onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicUsername">
           <Form.Label>Username</Form.Label>
